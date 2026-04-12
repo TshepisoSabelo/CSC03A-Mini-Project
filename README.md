@@ -20,18 +20,6 @@ https://www.kaggle.com/datasets/smaranjitghose/corn-or-maize-leaf-disease-datase
 
 ## Build
 
-```bash
-mvn clean package
-```
-
 ## Run
 
-```bash
-mvn exec:java -Dexec.mainClass="com.example.Main"
-```
-
 ## Test
-
-```bash
-mvn test
-```
