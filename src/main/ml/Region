@@ -1,0 +1,25 @@
+public class Region{
+    private int[] meanRGB;
+    private int numPixels;
+    private List<Pixel> pixels;
+
+    public Region(){
+        this.meanRGB = new int[]{0, 0, 0};
+        this.numPixels = 0;
+        this.pixels = new ArrayList<>();
+    }
+
+    public void addPixel(Pixel p){
+        this.pixels.add(p);
+        this.numPixels++;
+
+        // Update mean RGB values
+        for(int i = 0; i < 3; i++){
+            meanRGB[i] = (meanRGB[i] + p.getRGB[i]) / 2
+        }
+    }
+
+    private void calculateMeanRGB(){
+
+    }
+}
