@@ -1,10 +1,5 @@
-/**
- * Represents a single pixel in an image or grid.
- * <p>
- * A pixel is defined by its x and y position, an integer color value,
- * and a red-green-blue component array.
- */
 public class Pixel {
+	private int ID;
     private int x;
     private int y;
     private int[] RGB;
@@ -19,6 +14,7 @@ public class Pixel {
     public Pixel(int x, int y, int[] rgb) {
         this.x = x;
         this.y = y;
+        this.ID = y*255 + x;
         this.RGB = rgb;
     }
 
@@ -56,8 +52,11 @@ public class Pixel {
      *
      * @return the RGB values stored for this pixel
      */
-    public int[] getRBG() {
+    public int[] getRGB() {
         return this.RGB;
     }
+    
+    public int getID() {
+    	return this.ID;
+    }
 }
-
