@@ -4,7 +4,7 @@
  * An edge connects two nodes (s1 and s2) and has an associated weight,
  */
 public class Edge implements Comparable<Edge>{
-    int s1, s2;
+    int s1;
     int s2;
     double weight;
 
@@ -49,7 +49,7 @@ public class Edge implements Comparable<Edge>{
      * @return a negative integer, zero, or a positive integer as this edge's weight
      *         is less than, equal to, or greater than the specified edge's weight
      */
-    @Overrides
+    @Override
     public int compareTo(Edge other) {
         return Double.compare(this.weight, other.weight);
     }
