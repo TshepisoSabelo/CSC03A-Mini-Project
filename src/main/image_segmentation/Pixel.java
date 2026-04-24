@@ -1,3 +1,5 @@
+package image_segmentation;
+
 public class Pixel {
 	private int ID;
     private int x;
