@@ -127,14 +127,7 @@ public class ArrayList<T> implements IList<T>,Iterable<T>
 		//check if the array is full or not:
 		if(size==array.length)
 		{
-			//increase the size of the array:Doubling strategy 
-			T[] copy=(T[]) new Object[array.length*2];
-			//copy all items into the new array:
-			for(int c=0;c<array.length;c++)
-			{
-				copy[c]=array[c];
-			}
-			array=copy;
+			increaseSizeOfArray();
 		}
 		//shift elements to the right .
 		for(int k=size-1;k>=i;k--)
@@ -174,9 +167,22 @@ public class ArrayList<T> implements IList<T>,Iterable<T>
 	public String toString() {
 		return "List [array=" + Arrays.toString(array) + ", size=" + size + "]";
 	}
-	
-
-
+	 /**
+	    * Method to add an item to the end of the list 
+	    * @param item The item that will be added to the end of the list 
+	    */
+	    public void addlast(T item)
+	    {
+	    	//increase size 
+	        if(size==array.length)
+	        {
+	        	increaseSizeOfArray();
+	        }
+	        array[size]=item ;
+	        size++;
+	        
+	    }
+  
 	//helper functions
 	/**
      * Creates the internal array with the specified size.
@@ -198,6 +204,22 @@ public class ArrayList<T> implements IList<T>,Iterable<T>
 		   throw new IndexOutOfBoundsException("Index is out of bounds");
 		
 	}
-
+	/**
+	 * Method uses a doubling strategy to increase the size of the array
+	 */
+	private void increaseSizeOfArray()
+	{
+		//increase the size of the array:Doubling strategy 
+				@SuppressWarnings("unchecked")
+				T[] copy=(T[]) new Object[array.length*2];
+				//copy all items into the new array:
+				for(int c=0;c<array.length;c++)
+				{
+					copy[c]=array[c];
+				}
+				array=copy;
+	}
+	
+    
 
 }
