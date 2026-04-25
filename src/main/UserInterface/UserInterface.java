@@ -41,7 +41,7 @@ public class UserInterface extends Application
 		Button btnUpload = new Button("Upload Images");
 		//Activate functionality behind the button
 		btnUpload.setOnAction(e -> selectImages(stage));
-		Button one = new Button("haii");
+		
 		Button btnConfirm = new Button("Submit Images");
 		//Activate the functionality behind the button
 		btnConfirm.setOnAction(e -> submitImages());
