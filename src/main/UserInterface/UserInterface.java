@@ -56,7 +56,7 @@ public class UserInterface extends Application
 		root.add(uploadPrompt, 0,  2);
 		
 		root.add(hButtons,  1,  3);
-		root.add(gpane, 2, 4);
+		root.add(gpane, 2, 3);
 		
 		
 		Scene scene = new Scene(root, 500, 500);
