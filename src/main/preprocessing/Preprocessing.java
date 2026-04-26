@@ -3,12 +3,15 @@ package preprocessing;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.io.File;
 import java.io.IOException;
 
 import datastructures.*;
+import image_segmentation.Pixel;
 
 import javax.imageio.ImageIO;
+
 /**
  * The Preprocessing class is responsible for preparing images before they undergo
  * segmentation. It provides functionality to load images from a directory, inspect
@@ -41,6 +44,8 @@ public class Preprocessing<T>
     }
 
 
+	//#####################Functions################################
+
 	public  void  getsize(ArrayList<BufferedImage> list) 
 	{
 		for(int i=0;i<list.size();i++)
@@ -48,6 +53,32 @@ public class Preprocessing<T>
 			BufferedImage imgBufferedImage=list.get(i);
 			System.out.println("Width:"+imgBufferedImage.getWidth()+"Height:"+imgBufferedImage.getHeight());
 		}
+	}
+	/**
+	 * This method takes in an file and returns a list of buffered Images
+	 * @param file The name of the file that contains the images that the user inserted 
+	 * @return 
+	 * @throws IOException 
+	 */
+	public  ArrayList<BufferedImage> readImages(String file) throws IOException
+	{ 
+		//Read in all the images and store into  a list .
+
+		//create an array of files:
+		File[] array=new File(file).listFiles((dir, name) -> name.endsWith(".jpg")|| name.endsWith(".png"));
+		ArrayList<BufferedImage> listImagesList=new ArrayList<BufferedImage>();
+		int count=0;
+		for(File eachfile: array)
+		{
+			//image loading 
+			BufferedImage image=ImageIO.read(eachfile);	
+			//add each image into the list
+			listImagesList.add(count, image);
+			count++;
+		}
+
+		return listImagesList;	
+		
 	}
 	/**
 	 * Method to resize the image as 256x256 to ensure consistency in images 
@@ -132,6 +163,51 @@ public class Preprocessing<T>
     	return copy;
    }
    /**
+    * Method returns a 2D array of the pixel class that represents the images 
+    * @param image Image being converted to a 2D 
+    * @return
+    */
+   
+   public Pixel[][] ImageAs2DPixel(BufferedImage image)
+   {
+	   int height=image.getHeight();
+	   int width=image.getWidth();
+	   //need an empty constructor for pixel:for now use null
+	   Pixel[][] PixelImage=new Pixel[width][height];
+	   for(int r=0;r<width;r++)
+	   {
+		for(int c=0;c<height;c++)
+		{
+			//intialise each pixel.
+			PixelImage[r][c]=new Pixel();
+
+		}
+	   }
+	   int[] RGB=new int[3];
+	   ColorModel cm=   image.getColorModel();
+	   for(int r=0;r<width;r++)
+	   {
+		   for(int c=0;c<height;c++)
+		   {
+			 int pixel=  image.getRGB(r, c);
+			 //Stored as Red ,Green,Blue
+			 RGB[0]=cm.getRed(pixel);
+			 RGB[1]=cm.getGreen(pixel);
+			 RGB[2]=cm.getBlue(pixel);
+			
+			 //set the rgb array for each pixel
+			 PixelImage[r][c].setRGB(RGB);
+			 //set the coordinates of each pixel:
+			 PixelImage[r][c].setCoodinate(r,c);
+			 //id is set automatically 1-n
+			 
+		   }
+	   }
+	   return PixelImage;
+   }
+   //##################Helper Functions#######################
+   
+   /**
 	 *Helper function: Checks whether a given image has dimensions of exactly 256x256 pixels
 	 * @param The BufferedImage to be checked
 	 * @return Boolean value indicating if the image is a 256x256 or not 
@@ -144,5 +220,6 @@ public class Preprocessing<T>
   	}
   	return false;
   }
+  
   
 }
